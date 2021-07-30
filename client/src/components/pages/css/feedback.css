@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    max-width: 500px;
+}
+
+.stars {
+    display: flex;
+    
+}
+
+.textarea {
+    border: 1px solid #a9a9a9;
+    padding: 10;
+    margin: 20px 0;
+    width: 7000;
+  }
+
+.button {
+    border: 1px solid #a9a9a9;
+    width: 100;
+    padding: 10;
+    
+  }
+
+  .leftside, .rightside {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+  }
+
+  .leftside {
+    margin: 10px;
+  }
+ .alignPosition {
+   margin-right: 20px;
+   margin-bottom: 10px;
+ }
+
+ 
+
+  
