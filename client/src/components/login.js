@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './navbar.css';
 import { FaParking } from 'react-icons/fa';
 
 const Login = (props) => {
 
-    const {
+    /*const {
         email, 
         setEmail,
         password, 
@@ -15,7 +15,32 @@ const Login = (props) => {
         setHasAccount, 
         emailErr, 
         passwordErr
-    } = props;
+    } = props;*/
+    const {handleSignup} = props;
+  
+  const [email, setEmail] = useState('');
+  const [ password, setPassword] = useState('');
+  const [emailErr, setEmailErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+  const [hasAccount, setHasAccount] = useState(true);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const data = {email, password};
+    
+
+    fetch('http://92.87.91.43:4000/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    }).then( () => {
+        console.log(data)
+        console.log('login');
+    })
+
+    props.history.push('/home');
+    
+}
 
     return(
         <section className="login">

@@ -43,7 +43,7 @@ class Feedback2 extends React.Component {
                    
                   <Scrollbars>
                   {this.state.userFeedback.map((data) => (
-                       <Card key={data.id} className="alignPosition">
+                       <Card key={data.email} className="alignPosition">
                          <Card.Body>
                            <Card.Title style={{fontStyle: 'bold'}}>  {data.user_email} </Card.Title>
                              <Card.Text> {data.msg}</Card.Text>

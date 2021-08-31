@@ -1,0 +1,36 @@
+body{
+  display: grid;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: handwriting;
+  color: white;
+  background: #333;
+  background-image: 
+    radial-gradient(ellipse at bottom left, rgba(0,163,203,1) 40%, rgba(0,163,203,0) 40%),
+    radial-gradient(ellipse at top right, rgba(0,163,203,1) 30%, rgba(0,163,203,0) 30%),
+    linear-gradient(to right, rgba(98,87,147,1) 0%, rgba(98,87,147,1) 33%, rgba(213,93,100,1) 33%, rgba(213,93,100,1) 66%, rgba(228,145,41,1) 66%);
+  background-size: 50% 100%;
+  }
+  
+  .cardAnalitycs {
+    margin: auto;
+    padding: 2em;
+    border-radius: 1em;
+    border: 1px solid transparentize(white, 0.5);
+    text-shadow: 0 0 1em transparentize(black, 0.5);
+    background: transparent;
+    backdrop-filter: blur(20px);
+    transform: perspective(500px);
+    transform-style: preserve-3d;
+    width: 500px;
+    height: 400px;
+    
+  }
+  .welcome {
+    font-family: handwriting;
+    transform: translateZ(20px);
+  }

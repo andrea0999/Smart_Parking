@@ -1,15 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React,{useState, useEffect} from 'react';
 import '../../App.css';
 import axios from 'axios';
 
-export default function Home(props) { 
-    const handleLogin = () => {
-        props.history.push('/login');
-    }
-        
+export default function StartInstance(props) {
 
-
-    const [configuration, setConfigurationsData] =useState([]);
+//const [cmd, setCmd] = useState([]);
+const [configuration, setConfigurationsData] =useState([]);
 const [array,setArray] = useState([]);
 
     useEffect( () => {
@@ -18,7 +14,7 @@ const [array,setArray] = useState([]);
          axios 
             .get('http://92.87.91.43:4000/cplanes' )
             .then( res => {
-              //console.log(res)
+              console.log(res)
               setConfigurationsData(res.data)
             })
             .catch( err => {
@@ -30,7 +26,7 @@ const [array,setArray] = useState([]);
                 axios
                 .get('http://92.87.91.43:4000/exec_command/' + configure.camName)
                 .then( response => {
-                  console.log(response)                  
+                  //console.log(response)                  
                   console.log(response.config.url)
                   setArray(oldArray => [...oldArray,response.config.url] );
                  
@@ -46,14 +42,10 @@ const [array,setArray] = useState([]);
 
       const handleAlert = () => {
         alert("Instance open")
-        props.history.push('/home');
+        //props.history.push('/home');
       }
     return(
-        <div>
-            <br/>
-            <h1>Home</h1>
-            <button onClick={handleLogin}>Login</button>
-
+        <div>           
             {array.map( (data) => (
                 <ul>
                     <li style={{color: '#fff'}} >
@@ -62,6 +54,8 @@ const [array,setArray] = useState([]);
                     </li>
                 </ul>
                 ))}
+            
+            
         </div>
     );
     

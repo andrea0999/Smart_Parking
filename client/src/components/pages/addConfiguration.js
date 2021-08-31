@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import './css/addConfiguration.css';
-//import Configurations from './configurations';
-
 
 function AddConfiguration(props) {
     
@@ -11,14 +9,16 @@ function AddConfiguration(props) {
     const [camIp, setCamIp] = useState();
     const [configuration, setConfiguration] = useState();
     const [ipV4Host, setIpV4Host] = useState();
+    const [fleg, setFleg] = useState();
     const [scheduledForUpdate, setScheduledForUpdate] = useState();
     const [scheduledForRefresh, setScheduledForRefresh] = useState(true);
+    const [config, setConfigurationsData] = useState([]);
 
     const [isPending, setIsPending] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const data = {cplaneId,state,camName,camIp,configuration,ipV4Host,scheduledForUpdate,scheduledForRefresh};
+        const data = {cplaneId,state,camName,camIp,configuration,ipV4Host,fleg,scheduledForUpdate,scheduledForRefresh};
         
         setIsPending(true);
 
@@ -27,8 +27,21 @@ function AddConfiguration(props) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
         }).then( () => {
-            console.log('added ');
-            setIsPending(false);
+            setConfigurationsData(
+                config.map( (val) => {
+                    const configMod = {
+                        state: val.state,
+                        camName: val.camName,
+                        camIp: val.camIp,
+                        configuration: val.configuration,
+                        ipV4Host: val.ipV4Host,
+                        fleg: val.fleg
+                    }
+                    return configMod;
+                })
+            );
+            console.log(data)
+            console.log('added');
         })
 
         props.history.push('/configurations');
@@ -83,15 +96,17 @@ function AddConfiguration(props) {
                     required
                     value={ipV4Host}
                     onChange={ (e) => setIpV4Host(e.target.value)}
+                />
+
+                <input 
+                    type= 'text'
+                    placeholder='Plate/Web'
+                    required
+                    value={fleg}
+                    onChange={ (e) => setFleg(e.target.value)}
                 />    
 
-                <select   className="select-style"
-                    value={scheduledForUpdate}
-                    onChange={ (e) => setScheduledForUpdate(e.target.value)}>
-                    
-                    <option value='true'>true</option>
-                    <option value='false'>false</option>
-                </select>
+                
 
                 { !isPending && <button className="button-style" onClick={handleSubmit}>Add Data</button>}
                 { isPending && <button disabled>Loading</button>}

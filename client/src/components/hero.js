@@ -11,11 +11,14 @@ import ParkingMap from './pages/parkingMap';
 import Configurations from './pages/configurations';
 import Analitycs from './pages/analitycs';
 import AddConfiguration from './pages/addConfiguration';
-//import axios from 'axios';
+import UpdateConfiguration from './pages/updateConfiguration';
+import StartInstance from './pages/startInstance';
+import { NavDropdown } from 'react-bootstrap';
+import ViewStream from './pages/viewStream';
+import Login from './login';
 
 
-
-const Hero = ({handleLogout}) => {
+const Hero = (props,{handleLogout}) => {
 
     const[click, setClick] = useState(false); 
     const[button, setButton] = useState(true);
@@ -36,6 +39,10 @@ const Hero = ({handleLogout}) => {
     },[]);
 
     window.addEventListener('resize', showButton);
+
+    const handleBack = () => {
+        props.history.push('/home');
+    }
 
     return (
         <section className="hero">
@@ -79,6 +86,15 @@ const Hero = ({handleLogout}) => {
                            </Link>
                        </li>
                        <li className='nav-item'>
+                           <Link  className='nav-links' onClick={closeMobileMenu}>
+                               <NavDropdown >
+                                   <StartInstance onClick={handleBack}/>
+                               </NavDropdown>
+                             Start Instance
+                           </Link>
+                           
+                       </li>
+                       <li className='nav-item'>
                            { !button && <Link to='/logout' className='nav-links' onClick={handleLogout}>
                                Logout
                            </Link>
@@ -102,6 +118,10 @@ const Hero = ({handleLogout}) => {
         <Route path='/analitycs' exact component={Analitycs}/>
         <Route path='/logout' exact component={Logout}/>
         <Route path='/addConfiguration' exact component={AddConfiguration}/>
+        <Route path='/updateConfiguration' exact component={UpdateConfiguration}/>
+        <Route path='/viewStream' exact component={ViewStream}/>
+        <Route path='/login' exact component={Login}/>
+        
       </Switch>
           </Router>
         </section>

@@ -25,7 +25,7 @@ const App = () => {
       setPasswordErr('');
   };
 
-  const handleLogin = () => {
+  /*const handleLogin = () => {
     clearErrors();
     //const { authState } = useOktaAuth();
     firebase
@@ -43,7 +43,7 @@ const App = () => {
               break;
           }
         })
-  };
+  };*/
 
   const handleSignup = () => {
     clearErrors();
@@ -88,16 +88,7 @@ const App = () => {
           <Hero handleLogout={handleLogout} />
       ) : (
         <Login 
-          email={email} 
-          setEmail={setEmail} 
-          password={password} 
-          setPassword={setPassword} 
-          handleLogin={handleLogin}
           handleSignup={handleSignup}
-          hasAccount={hasAccount}
-          setHasAccount={setHasAccount}
-          emailErr={emailErr}
-          passwordErr={passwordErr}
         />
       )}
       

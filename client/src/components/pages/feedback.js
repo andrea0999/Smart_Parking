@@ -11,7 +11,7 @@ const colors = {
     
 };
 
-const Feedback = () => {
+const Feedback = (props) => {
 
     const [currentValue, setCurrentValue] = useState(0);
     const [hoverValue, setHoverValue] = useState(undefined);
@@ -53,6 +53,8 @@ const Feedback = () => {
 
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [valueTextArea, setValueTextArea] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
   const handleClose = (e) => { setShow(false)
     console.log('cevaaaa handle close')
@@ -61,7 +63,7 @@ const Feedback = () => {
 
     e.preventDefault();
       //retrievEmail();
-      const data = {email, msg};
+      const data = {inputValue, valueTextArea};
 
       fetch('http://92.87.91.43:4000/postFeedback', {
           method: 'POST',
@@ -74,8 +76,12 @@ const Feedback = () => {
           console.log('feedback added ');
       })
 
-      console.log(data.msg);
-      console.log(data.email);
+      console.log(data.inputValue);
+      console.log(data.valueTextArea);
+
+      //props.history.push('/feedback2');
+      setValueTextArea('');
+      setInputValue('');
       
   }
   const handleShow = () => { setShow(true)
@@ -87,35 +93,24 @@ const Feedback = () => {
       setShowModal(handleShow);
     }
 
+    const handleInput = (e) => {
+      setInputValue(e.target.value);
+    };
+
+    const handleTextArea = (e) => {
+      setValueTextArea(e.target.value);
+    };
 
   return (
     <div>
     <div style={styles.container}>
       
-      <div style={styles.stars}>
-        {stars.map((_, index) => {
-          return (
-            <FaStar
-              key={index}
-              size={24}
-              onClick={() => handleClick(index + 1)}
-              onMouseOver={() => handleMouseOver(index + 1)}
-              onMouseLeave={handleMouseLeave}
-              color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
-              style={{
-                marginRight: 10,
-                cursor: "pointer"
-              }}
-            />
-          )
-        })}
-      </div>
       <br/>
       <textarea
         placeholder="What's your experience?"
         style={styles.textarea}
-        value={msg}
-        onChange={ (e) => setMsg(e.target.value)}
+        value={valueTextArea}
+        onChange={ handleTextArea}
         //onChange={getData}
       />
 
@@ -129,13 +124,13 @@ const Feedback = () => {
                     type= 'text'
                     placeholder='Your email'
                     required
-                    value={email}
-                    onChange={ (e) => setEmail(e.target.value)}
+                    value={inputValue}
+                    onChange={ handleInput}
                 />
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant='secondary' onClick={handleClose}>
+            <Button type="reset" variant='secondary' onClick={handleClose}>
                Close
             </Button>
           </Modal.Footer>
